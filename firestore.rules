@@ -1,0 +1,98 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwnerAdmin() {
+      return signedIn()
+        && request.auth.uid == "2vxWgt5PXCcBYH3uQAylQpRSSXv2";
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && (isOwnerAdmin()
+          || exists(/databases/$(database)/documents/admins/$(request.auth.uid)));
+    }
+
+    function validStatus(status) {
+      return status in [
+        "pending",
+        "founding-author",
+        "rejected",
+        "waitlist",
+        "needs-more-info"
+      ];
+    }
+
+    match /admins/{adminId} {
+      allow get: if signedIn() && request.auth.uid == adminId;
+      allow list, create, update, delete: if false;
+    }
+
+    match /foundingAuthorApplications/{userId} {
+      allow read: if isAdmin() || (signedIn() && request.auth.uid == userId);
+
+      allow create: if signedIn()
+        && request.auth.uid == userId
+        && request.auth.token.email_verified == true
+        && request.resource.data.keys().hasOnly([
+          "uid",
+          "fullName",
+          "email",
+          "experience",
+          "over17",
+          "bookAnswer",
+          "status",
+          "createdAt",
+          "submittedAt",
+          "updatedAt",
+          "reviewedAt",
+          "reviewedBy",
+          "reviewedByEmail",
+          "adminNote"
+        ])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.fullName is string
+        && request.resource.data.fullName.size() >= 2
+        && request.resource.data.fullName.size() <= 80
+        && request.resource.data.experience is string
+        && request.resource.data.experience.size() > 0
+        && request.resource.data.experience.size() <= 500
+        && request.resource.data.over17 == true
+        && request.resource.data.bookAnswer is string
+        && request.resource.data.bookAnswer.size() >= 30
+        && request.resource.data.bookAnswer.size() <= 3000
+        && request.resource.data.status == "pending"
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.submittedAt == request.time
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data.reviewedAt == null
+        && request.resource.data.reviewedBy == null
+        && request.resource.data.reviewedByEmail == null
+        && request.resource.data.adminNote == "";
+
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          "status",
+          "updatedAt",
+          "reviewedAt",
+          "reviewedBy",
+          "reviewedByEmail",
+          "adminNote"
+        ])
+        && validStatus(request.resource.data.status)
+        && request.resource.data.updatedAt == request.time
+        && request.resource.data.reviewedAt == request.time
+        && request.resource.data.reviewedBy == request.auth.uid
+        && request.resource.data.reviewedByEmail == request.auth.token.email
+        && request.resource.data.adminNote is string
+        && request.resource.data.adminNote.size() <= 5000;
+
+      allow delete: if isAdmin();
+    }
+  }
+}

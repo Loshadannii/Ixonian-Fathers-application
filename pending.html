@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="Ixonian (BN:A) (B).png" />
+  <title>Profile - Ixonian</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background:
+        linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+        url("Screenshot 2026-06-17 at 14.47.07.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    .hero {
+      width: 100%;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      padding-top: 90px;
+    }
+
+    .top-area {
+      height: 90px;
+      background: #000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .header-left {
+      position: absolute;
+      top: 0;
+      left: max(0px, calc((100vw - 1100px) / 2 + 20px));
+      height: 90px;
+      background: #000;
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-box {
+      display: flex;
+      align-items: center;
+      border: 1px solid white;
+      padding: 0 14px 0 0;
+    }
+
+    .logo-box {
+      width: auto;
+      height: auto;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-img {
+      width: 55px;
+      height: auto;
+      display: block;
+    }
+
+    .header-brand-text {
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+    }
+
+    .header-brand-name {
+      font-family: "Times New Roman", serif;
+      font-size: 1.3rem;
+      font-weight: 100;
+      font-style: normal;
+      color: rgb(255, 255, 255);
+      letter-spacing: 9px;
+      line-height: 1;
+    }
+
+    .header-brand-tagline {
+      font-size: 9px;
+      font-style: italic;
+      color: rgba(255,255,255,.6);
+      font-weight: 300;
+      letter-spacing: 1px;
+      margin-top: 1px;
+    }
+
+    .more-btn {
+      position: absolute;
+      top: 50%;
+      right: max(22px, calc((100vw - 1100px) / 2 + 20px));
+      width: 140px;
+      height: 38px;
+      transform: translateY(-50%);
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+      color: rgba(255,255,255,.85);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,.1),
+        inset 0 -1px 2px rgba(0,0,0,.4),
+        0 4px 12px rgba(0,0,0,.5);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .more-btn:hover {
+      background: linear-gradient(135deg, #333 0%, #222 100%);
+      border-color: rgba(255,255,255,.25);
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,.12),
+        inset 0 -1px 2px rgba(0,0,0,.4),
+        0 4px 16px rgba(0,0,0,.6);
+    }
+
+    .more-chevron {
+      font-size: 14px;
+      color: rgba(255,255,255,.5);
+      margin-top: 1px;
+    }
+
+    /* ===== Profile Content ===== */
+    .profile-section {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .profile-card {
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow:
+        0 8px 32px rgba(0,0,0,.5),
+        inset 0 1px 0 rgba(255,255,255,.05);
+      padding: 60px 48px;
+      text-align: center;
+    }
+
+    .avatar-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #5e8d91, #3a6a6e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      box-shadow: 0 8px 24px rgba(94, 141, 145, 0.3);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .avatar-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .avatar-initial {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 36px;
+      color: #fff;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .profile-card h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 32px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 8px;
+      letter-spacing: 0;
+    }
+
+    .profile-card .subtitle {
+      font-size: 16px;
+      color: rgba(255,255,255,.55);
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .ix-pending-inline {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: rgba(255,255,255,.72);
+      margin-bottom: 28px;
+    }
+
+    .ix-mini-book-loader {
+      display: inline-block;
+      width: 33px;
+      height: 26px;
+      border: 3px solid currentColor;
+      position: relative;
+      perspective: 120px;
+      flex-shrink: 0;
+    }
+
+    .ix-mini-book-page {
+      display: block;
+      width: 16px;
+      height: 26px;
+      border: 3px solid currentColor;
+      border-left: 1.5px solid rgba(255,255,255,.35);
+      margin: 0;
+      position: absolute;
+      right: -3px;
+      top: -3px;
+      overflow: hidden;
+      background: rgba(255,255,255,.14);
+      transform-style: preserve-3d;
+      transform-origin: left center;
+    }
+
+    .ix-mini-book-loader .ix-mini-book-page:nth-child(1) {
+      animation: ixMiniPageTurn 1.2s cubic-bezier(0, .39, 1, .68) 1.6s infinite;
+    }
+
+    .ix-mini-book-loader .ix-mini-book-page:nth-child(2) {
+      animation: ixMiniPageTurn 1.2s cubic-bezier(0, .39, 1, .68) 1.45s infinite;
+    }
+
+    .ix-mini-book-loader .ix-mini-book-page:nth-child(3) {
+      animation: ixMiniPageTurn 1.2s cubic-bezier(0, .39, 1, .68) 1.2s infinite;
+    }
+
+    .ix-pending-text {
+      display: block;
+      font-size: 15px;
+      color: rgba(255,255,255,.7);
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .ix-pending-text::after {
+      content: "";
+      animation: ixPendingDots 2s cubic-bezier(0, .39, 1, .68) infinite;
+    }
+
+    @keyframes ixMiniPageTurn {
+      0% {
+        transform: rotateY(0deg);
+      }
+
+      20% {
+        background: rgba(255,255,255,.24);
+      }
+
+      40%,
+      100% {
+        background: transparent;
+        transform: rotateY(-180deg);
+      }
+    }
+
+    @keyframes ixPendingDots {
+      0% {
+        content: "";
+      }
+
+      33% {
+        content: ".";
+      }
+
+      66% {
+        content: "..";
+      }
+
+      100% {
+        content: "...";
+      }
+    }
+
+    .profile-card .message {
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255,255,255,.65);
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+
+    .profile-card .message strong {
+      color: rgba(255,255,255,.9);
+    }
+
+    .profile-details {
+      background: rgba(255, 255, 255, 0.098);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+
+    .profile-details .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgb(107, 114, 124);
+    }
+
+    .profile-details .detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .profile-details .detail-label {
+      font-size: 13px;
+      color: rgba(255, 253, 253, 0.85);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .profile-details .detail-value {
+      font-size: 14px;
+      color: rgba(255,255,255,.8);
+      font-weight: 500;
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      width: 100%;
+      background: #0a0d14;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 50px 20px 30px;
+      margin-top: 80px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer-brand-col .footer-logo-img {
+      width: 160px;
+      height: auto;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand-col .tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,.45);
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .footer-col h4 {
+      color: rgba(255,255,255,.7);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .footer-col a {
+      display: block;
+      color: rgba(255,255,255,.4);
+      font-size: 14px;
+      line-height: 2;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: rgba(255,255,255,.75);
+    }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 30px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-bottom p {
+      color: rgba(255,255,255,.25);
+      font-size: 12px;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 760px) {
+      .top-area {
+        height: 80px;
+      }
+
+      .header-left {
+        height: 80px;
+      }
+
+      .brand-box {
+        padding: 0 10px 0 0;
+      }
+
+      .logo-img {
+        width: 40px;
+      }
+
+      .header-brand-name {
+        font-size: 1.1rem;
+        letter-spacing: 4px;
+      }
+
+      .header-brand-text {
+        margin-left: 6px;
+      }
+
+      .more-btn {
+        width: 110px;
+        height: 34px;
+        font-size: 13px;
+      }
+
+      .profile-card {
+        padding: 40px 24px;
+      }
+
+      .profile-card h1 {
+        font-size: 26px;
+      }
+
+      .profile-details {
+        padding: 16px 18px;
+      }
+
+      .footer {
+        padding: 40px 20px 24px;
+        margin-top: 50px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .profile-card {
+        padding: 30px 18px;
+      }
+
+      .profile-card h1 {
+        font-size: 22px;
+      }
+
+      .avatar-circle {
+        width: 60px;
+        height: 60px;
+      }
+
+      .avatar-initial {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="page">
+    <section class="hero">
+
+      <header class="top-area">
+        <div class="header-left">
+          <div class="brand-box">
+            <div class="logo-box">
+              <img src="Ixonian (BN:A) (w).png" alt="Ixonian" class="logo-img">
+            </div>
+            <div class="header-brand-text">
+              <div class="header-brand-name">IXONIAN</div>
+              <div class="header-brand-tagline">Not just a book, it's a lesson</div>
+            </div>
+          </div>
+        </div>
+
+        <button id="signOutBtn" class="more-btn" type="button">
+          Sign Out
+          <span class="more-chevron">→</span>
+        </button>
+      </header>
+
+      <!-- Profile Content -->
+      <section class="profile-section">
+        <div class="profile-card">
+
+          <div class="avatar-circle" id="avatarCircle">
+            <span class="avatar-initial" id="avatarInitial"></span>
+            <img class="avatar-photo" id="avatarPhoto" src="" alt="Profile photo" hidden>
+          </div>
+
+          <h1>You're in.</h1>
+          <p class="subtitle">Your application is under review</p>
+
+          <span class="ix-pending-inline">
+            <span class="ix-mini-book-loader" aria-hidden="true">
+              <span class="ix-mini-book-page"></span>
+              <span class="ix-mini-book-page"></span>
+              <span class="ix-mini-book-page"></span>
+            </span>
+            <span class="ix-pending-text">Pending review</span>
+          </span>
+
+          <p class="message">
+            Thanks for applying, <strong id="displayName">Founding Author</strong>. We'll review your submission and reach out soon. Keep an eye on your inbox.
+          </p>
+
+          <div class="profile-details" id="profileDetails">
+            <div class="detail-row">
+              <span class="detail-label">Email</span>
+              <span class="detail-value" id="userEmail">—</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Status</span>
+              <span class="detail-value" style="color: #f0c040;">Pending</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Submitted</span>
+              <span class="detail-value">Today</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <div class="footer-brand-col">
+            <img src="Ixonian white.png" alt="Ixonian" class="footer-logo-img">
+            <p class="tagline">Be <em>Ixonian</em> from the start</p>
+          </div>
+
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#">About</a>
+            <a href="#">Policy</a>
+            <a href="#">Details</a>
+          </div>
+
+          <div class="footer-col">
+            <h4>Support</h4>
+            <a href="#">Help</a>
+            <a href="#">Contact</a>
+            <a href="#">FAQ</a>
+          </div>
+
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <a href="privacy-policy.html">Terms</a>
+            <a href="privacy-policy.html">Privacy</a>
+            <a href="profile.html">Profile</a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 Ixonian. All rights reserved.</p>
+          <p>Not just a book, it's a lesson</p>
+        </div>
+      </footer>
+
+    </section>
+  </main>
+
+  <script>
+    // Populate user info from localStorage
+    const email = localStorage.getItem('ixonian-email') || '—';
+    const name = localStorage.getItem('ixonian-name') || 'Founding Author';
+    const savedPhoto = localStorage.getItem('ixonian-photo') || '';
+    const photo = savedPhoto && savedPhoto !== 'null' && savedPhoto !== 'undefined' ? savedPhoto : '';
+
+    document.getElementById('displayName').textContent = name;
+    document.getElementById('userEmail').textContent = email;
+
+    // Show photo for Google users, otherwise show the first initial.
+    const avatarPhoto = document.getElementById('avatarPhoto');
+    const avatarInitial = document.getElementById('avatarInitial');
+
+    const showInitial = () => {
+      localStorage.removeItem('ixonian-photo');
+      avatarPhoto.removeAttribute('src');
+      avatarPhoto.hidden = true;
+      avatarPhoto.style.display = 'none';
+      const firstLetter = (name || email || '?').trim()[0]?.toUpperCase() || '?';
+      avatarInitial.textContent = firstLetter;
+      avatarInitial.hidden = false;
+      avatarInitial.style.display = 'block';
+    };
+
+    if (photo) {
+      avatarPhoto.onerror = showInitial;
+      avatarPhoto.src = photo;
+      avatarPhoto.hidden = false;
+      avatarPhoto.style.display = 'block';
+      avatarInitial.hidden = true;
+      avatarInitial.style.display = 'none';
+    } else {
+      showInitial();
+    }
+  </script>
+  <script type="module" src="./script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="Ixonian (BN:A) (B).png" />
+  <title>More Details - Ixonian</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background:
+        linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+        url("Screenshot 2026-06-17 at 14.47.07.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    .hero {
+      width: 100%;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      padding-top: 90px;
+    }
+
+    .top-area {
+      height: 90px;
+      background: #000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .header-left {
+      position: absolute;
+      top: 0;
+      left: max(0px, calc((100vw - 1100px) / 2 + 20px));
+      height: 90px;
+      background: #000;
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-box {
+      display: flex;
+      align-items: center;
+      border: 1px solid white;
+      padding: 0 14px 0 0;
+    }
+
+    .logo-box {
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-img {
+      width: 55px;
+      height: auto;
+      display: block;
+    }
+
+    .header-brand-text {
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+    }
+
+    .header-brand-name {
+      font-family: "Times New Roman", serif;
+      font-size: 1.3rem;
+      font-weight: 100;
+      color: #fff;
+      letter-spacing: 9px;
+      line-height: 1;
+    }
+
+    .header-brand-tagline {
+      font-size: 9px;
+      font-style: italic;
+      color: rgba(255,255,255,.6);
+      font-weight: 300;
+      letter-spacing: 1px;
+      margin-top: 1px;
+    }
+
+    .more-btn {
+      position: absolute;
+      top: 50%;
+      right: max(22px, calc((100vw - 1100px) / 2 + 20px));
+      width: 140px;
+      height: 38px;
+      transform: translateY(-50%);
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+      color: rgba(255,255,255,.85);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,.1),
+        inset 0 -1px 2px rgba(0,0,0,.4),
+        0 4px 12px rgba(0,0,0,.5);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .more-btn:hover {
+      background: linear-gradient(135deg, #333 0%, #222 100%);
+      border-color: rgba(255,255,255,.25);
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,.12),
+        inset 0 -1px 2px rgba(0,0,0,.4),
+        0 4px 16px rgba(0,0,0,.6);
+    }
+
+    .more-chevron {
+      font-size: 14px;
+      color: rgba(255,255,255,.5);
+      margin-top: 1px;
+    }
+
+    .more-menu {
+      position: absolute;
+      top: calc(50% + 28px);
+      right: max(22px, calc((100vw - 1100px) / 2 + 20px));
+      width: 190px;
+      padding: 8px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 10px;
+      background: rgba(8, 10, 14, .96);
+      box-shadow:
+        0 18px 34px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.06);
+      z-index: 110;
+    }
+
+    .more-menu[hidden] {
+      display: none;
+    }
+
+    .more-menu-item {
+      width: 100%;
+      min-height: 38px;
+      padding: 0 12px;
+      border: none;
+      border-radius: 7px;
+      background: transparent;
+      color: rgba(255,255,255,.82);
+      display: flex;
+      align-items: center;
+      text-align: left;
+      text-decoration: none;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 14px;
+      letter-spacing: .7px;
+      cursor: pointer;
+      transition: background .16s ease, color .16s ease;
+    }
+
+    .more-menu-item:hover,
+    .more-menu-item:focus-visible {
+      background: rgba(94, 141, 145, .22);
+      color: #fff;
+      outline: none;
+    }
+
+    .details-section {
+      max-width: 1040px;
+      margin: 44px auto;
+      padding: 0 20px;
+    }
+
+    .details-panel {
+      background: rgba(7, 8, 12, .91);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px;
+      box-shadow:
+        0 14px 38px rgba(0,0,0,.56),
+        inset 0 1px 0 rgba(255,255,255,.05);
+      padding: 34px 40px 40px;
+    }
+
+    .details-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 10px;
+      letter-spacing: 1.6px;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .details-title::before {
+      content: "";
+      width: 30px;
+      height: 30px;
+      border: 2px solid rgba(255,255,255,.84);
+      border-left-width: 6px;
+      border-radius: 3px 8px 8px 3px;
+      flex: 0 0 30px;
+      box-shadow:
+        inset 7px 0 0 rgba(94, 141, 145, .28),
+        0 0 0 5px rgba(94, 141, 145, .08);
+    }
+
+    .details-subtitle {
+      font-size: 14px;
+      color: rgba(255,255,255,.55);
+      line-height: 1.45;
+      margin-bottom: 22px;
+      max-width: 620px;
+    }
+
+    .details-body {
+      display: grid;
+      gap: 14px;
+    }
+
+    .details-body p {
+      color: rgba(255,255,255,.78);
+      font-size: 15px;
+      line-height: 1.62;
+      margin-bottom: 10px;
+    }
+
+    .details-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-block {
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.052), rgba(255,255,255,.018)),
+        rgba(0,0,0,.42);
+      padding: 18px 20px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .detail-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.25;
+      letter-spacing: 1.35px;
+      text-transform: uppercase;
+    }
+
+    .detail-heading::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      min-width: 24px;
+      background: rgba(255,255,255,.12);
+    }
+
+    .detail-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      border: 1px solid rgba(214, 224, 232, .32);
+      background: rgba(94, 141, 145, .13);
+      color: rgba(247,251,255,.92);
+      flex: 0 0 38px;
+      position: relative;
+      box-shadow:
+        inset 0 0 0 3px rgba(94, 141, 145, .08),
+        0 0 0 1px rgba(0,0,0,.9);
+    }
+
+    .detail-icon::before,
+    .detail-icon::after {
+      content: "";
+      position: absolute;
+      box-sizing: border-box;
+    }
+
+    .icon-welcome::before {
+      width: 22px;
+      height: 26px;
+      left: 8px;
+      top: 6px;
+      border: 2px solid currentColor;
+      border-left-width: 5px;
+      border-radius: 2px 6px 6px 2px;
+    }
+
+    .icon-welcome::after {
+      width: 10px;
+      height: 2px;
+      left: 18px;
+      top: 14px;
+      background: currentColor;
+      box-shadow: 0 6px 0 currentColor;
+    }
+
+    .icon-verified::before {
+      width: 23px;
+      height: 23px;
+      left: 7px;
+      top: 7px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+    }
+
+    .icon-verified::after {
+      width: 12px;
+      height: 7px;
+      left: 13px;
+      top: 17px;
+      border-left: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(-45deg);
+    }
+
+    .icon-title::before {
+      width: 22px;
+      height: 22px;
+      left: 8px;
+      top: 5px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+    }
+
+    .icon-title::after {
+      width: 14px;
+      height: 12px;
+      left: 12px;
+      top: 24px;
+      background: currentColor;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 72%, 0 100%);
+    }
+
+    .icon-credits::before {
+      width: 25px;
+      height: 25px;
+      left: 6px;
+      top: 6px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+    }
+
+    .icon-credits::after {
+      content: "$";
+      left: 14px;
+      top: 9px;
+      color: currentColor;
+      font: 700 18px/1 Arial, Helvetica, sans-serif;
+    }
+
+    .icon-recommend::before {
+      width: 23px;
+      height: 18px;
+      left: 7px;
+      top: 9px;
+      border: 2px solid currentColor;
+      border-radius: 4px;
+    }
+
+    .icon-recommend::after {
+      width: 7px;
+      height: 7px;
+      left: 25px;
+      top: 22px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(-45deg);
+    }
+
+    .icon-spots::before {
+      width: 6px;
+      height: 6px;
+      left: 8px;
+      top: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow:
+        12px 0 0 currentColor,
+        0 12px 0 currentColor,
+        12px 12px 0 currentColor;
+    }
+
+    .icon-spots::after {
+      width: 12px;
+      height: 12px;
+      right: 4px;
+      bottom: 4px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+    }
+
+    .icon-earnings::before {
+      width: 26px;
+      height: 16px;
+      left: 6px;
+      top: 10px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+    }
+
+    .icon-earnings::after {
+      width: 8px;
+      height: 8px;
+      left: 15px;
+      top: 14px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 8px 9px 0 -2px currentColor;
+    }
+
+    .icon-referral::before {
+      width: 8px;
+      height: 8px;
+      left: 6px;
+      top: 15px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow:
+        18px -9px 0 currentColor,
+        18px 9px 0 currentColor;
+    }
+
+    .icon-referral::after {
+      width: 20px;
+      height: 18px;
+      left: 11px;
+      top: 10px;
+      border-top: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: skewY(-22deg);
+    }
+
+    .icon-content::before {
+      width: 20px;
+      height: 26px;
+      left: 9px;
+      top: 6px;
+      border: 2px solid currentColor;
+      border-radius: 3px;
+    }
+
+    .icon-content::after {
+      width: 16px;
+      height: 3px;
+      left: 15px;
+      top: 21px;
+      border-radius: 2px;
+      background: currentColor;
+      transform: rotate(-35deg);
+      box-shadow: -5px -7px 0 -1px currentColor;
+    }
+
+    .icon-rights::before {
+      width: 22px;
+      height: 27px;
+      left: 8px;
+      top: 5px;
+      border: 2px solid currentColor;
+      border-radius: 10px 10px 7px 7px;
+    }
+
+    .icon-rights::after {
+      width: 11px;
+      height: 6px;
+      left: 14px;
+      top: 17px;
+      border-left: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(-45deg);
+    }
+
+    .icon-change::before {
+      width: 23px;
+      height: 23px;
+      left: 7px;
+      top: 7px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      border-right-color: transparent;
+    }
+
+    .icon-change::after {
+      width: 9px;
+      height: 9px;
+      right: 7px;
+      top: 8px;
+      border-top: 2px solid currentColor;
+      border-right: 2px solid currentColor;
+      transform: rotate(45deg);
+    }
+
+    .icon-message::before {
+      width: 24px;
+      height: 18px;
+      left: 7px;
+      top: 9px;
+      border: 2px solid currentColor;
+      border-radius: 4px;
+    }
+
+    .icon-message::after {
+      width: 9px;
+      height: 9px;
+      left: 14px;
+      top: 22px;
+      border-left: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(-45deg);
+      background: #000;
+    }
+
+    .details-list {
+      display: grid;
+      gap: 6px;
+      margin: 8px 0 12px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .details-list li {
+      position: relative;
+      padding-left: 18px;
+      color: rgba(255,255,255,.76);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .details-list li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      position: absolute;
+      left: 0;
+      top: .68em;
+      border-radius: 50%;
+      background: #5e8d91;
+      box-shadow: 0 0 0 3px rgba(94, 141, 145, .14);
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 22px;
+    }
+
+    .detail-note {
+      border-left: 3px solid #5e8d91;
+      border-top: 1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.28);
+      color: rgba(255,255,255,.76);
+      padding: 10px 12px;
+      margin-top: 10px;
+      border-radius: 0 6px 6px 0;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .detail-note strong {
+      color: rgba(255,255,255,.92);
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 500;
+    }
+
+    .footer {
+      width: 100%;
+      background: #000;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 48px 20px 28px;
+      margin-top: 90px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 36px;
+    }
+
+    .footer-logo-img {
+      width: 150px;
+      height: auto;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .tagline {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 14px;
+      color: rgba(255,255,255,.55);
+      font-style: italic;
+    }
+
+    .footer-col h4 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      margin-bottom: 14px;
+      color: rgba(255,255,255,.9);
+    }
+
+    .footer-col a {
+      display: block;
+      color: rgba(255,255,255,.45);
+      font-size: 13px;
+      text-decoration: none;
+      margin-bottom: 9px;
+      transition: color .2s ease;
+    }
+
+    .footer-col a:hover {
+      color: rgba(255,255,255,.8);
+    }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 34px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: rgba(255,255,255,.35);
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      .top-area {
+        height: 80px;
+      }
+
+      .header-left {
+        height: 80px;
+      }
+
+      .brand-box {
+        padding: 0 10px 0 0;
+      }
+
+      .logo-img {
+        width: 40px;
+      }
+
+      .header-brand-name {
+        font-size: 1.1rem;
+        letter-spacing: 4px;
+      }
+
+      .header-brand-text {
+        margin-left: 6px;
+      }
+
+      .more-btn {
+        width: 110px;
+        height: 34px;
+        font-size: 13px;
+      }
+
+      .more-menu {
+        top: 61px;
+        right: 16px;
+        width: 176px;
+      }
+
+      .details-section {
+        margin: 34px auto;
+        padding: 0 16px;
+      }
+
+      .details-panel {
+        padding: 24px 20px 28px;
+      }
+
+      .details-title {
+        font-size: 27px;
+      }
+
+      .detail-block {
+        padding: 16px;
+      }
+
+      .detail-heading {
+        align-items: flex-start;
+        font-size: 16px;
+      }
+
+      .detail-heading::after {
+        display: none;
+      }
+
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <section class="hero">
+      <header class="top-area">
+        <div class="header-left">
+          <div class="brand-box">
+            <div class="logo-box">
+              <img src="Ixonian (BN:A) (w).png" alt="Ixonian" class="logo-img">
+            </div>
+            <div class="header-brand-text">
+              <div class="header-brand-name">IXONIAN</div>
+              <div class="header-brand-tagline">Not just a book, it's a lesson</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="more-btn" id="moreBtn" type="button" aria-expanded="false" aria-controls="moreMenu">
+          More
+          <span class="more-chevron">▼</span>
+        </button>
+
+        <div class="more-menu" id="moreMenu" hidden>
+          <a class="more-menu-item" href="sign-in.html">Sign in</a>
+          <a class="more-menu-item" href="privacy-policy.html">Policy</a>
+          <a class="more-menu-item" href="more-details.html">Further details</a>
+          <a class="more-menu-item" href="index.html#plans">Plans</a>
+          <a class="more-menu-item" href="index.html#footerContact">Contacts</a>
+        </div>
+      </header>
+
+      <section class="details-section">
+        <div class="details-panel">
+          <h1 class="details-title">Further Details</h1>
+          <p class="details-subtitle">Use this section to explain more about Ixonian, the application, or the founding author program.</p>
+
+          <div class="details-body">
+            <section class="detail-block">
+              <h2 class="detail-heading"><span class="detail-icon icon-welcome" aria-hidden="true"></span>Welcome to the Ixonian Founding Author Application Program</h2>
+              <p>Thank you for your interest in becoming one of the first authors to help build the future of Ixonian. We are excited to welcome passionate writers, storytellers, creators, and publishers who wish to become part of our growing community from the very beginning.</p>
+              <p>The Founding Author Program is designed to recognize early supporters of the platform and provide opportunities that may help authors establish their presence, grow their audience, receive recognition for their work, and participate in the development of the Ixonian ecosystem.</p>
+              <p>By submitting an application, you are expressing your interest in being considered for Founding Author status. This application allows the Ixonian team to learn more about you, your writing goals, your experience, and how you may contribute to the platform's community and future growth.</p>
+            </section>
+
+            <section class="detail-block">
+              <h2 class="detail-heading"><span class="detail-icon icon-verified" aria-hidden="true"></span>Verified Founding Author Status</h2>
+              <p>Authors who are accepted into the Founding Author Program may qualify for a verified and trusted author account during the founding period.</p>
+              <p>The purpose of verification is to help readers identify legitimate creators and discover content from active members of the community. Verified Founding Author status may provide additional visibility throughout various sections of the platform, including author profiles, book listings, recommendation systems, search results, promotional opportunities, and community features.</p>
+              <p>Founding Authors will not be required to spend platform credits to obtain this verification during the founding period. However, verification does not exempt any author from platform policies, content requirements, quality standards, community guidelines, or moderation procedures.</p>
+              <p>Verification status may be suspended, removed, or reviewed if an account violates platform rules, engages in misleading activity, submits unauthorized content, or otherwise fails to meet the standards established by Ixonian.</p>
+              <div class="detail-note"><strong>Added detail:</strong> Verification is intended to improve trust and discoverability but does not guarantee views, sales, readership growth, publishing success, recommendation placement, or financial earnings.</div>
+            </section>
+
+            <section class="detail-block">
+              <h2 class="detail-heading"><span class="detail-icon icon-title" aria-hidden="true"></span>Founding Author Recognition and Special Titles</h2>
+              <p>One of the goals of Ixonian is to recognize and celebrate authors who consistently contribute meaningful content and help strengthen the community.</p>
+              <p>As the platform grows, authors may become eligible for special recognition titles based on a variety of factors, including but not limited to:</p>
+              <ul class="details-list details-grid">
+                <li>Audience growth</li>
+                <li>Reader engagement</li>
+                <li>Book performance</li>
+                <li>Community participation</li>
+                <li>Writing quality</li>
+                <li>Consistency</li>
+                <li>Platform contributions</li>
+                <li>Professional conduct</li>
+              </ul>
+              <p>Potential recognition titles may include:</p>
+              <ul class="details-list details-grid">
+                <li>Founding Author</li>
+                <li>Author of the Year</li>
+                <li>Author of the Month</li>
+                <li>Voice of Fiction</li>
+                <li>Voice of Romance</li>
+                <li>Voice of True Crime</li>
+                <li>Legacy Author</li>
+              </ul>
+              <p>Additional titles may be introduced in the future as the platform expands. These titles are intended to help authors showcase achievements and establish a stronger professional identity within the Ixonian community.</p>
+              <div class="detail-note"><strong>Added detail:</strong> Titles may have eligibility requirements, review processes, expiration periods, renewal requirements, or performance expectations depending on the specific title awarded.</div>
+            </section>
+
+            <section class="detail-block">
+              <h2 class="detail-heading"><span class="detail-icon icon-credits" aria-hidden="true"></span>Founding Author Credit Rewards</h2>
+              <p>Ixonian currently plans to reward a select group of Founding Authors who demonstrate exceptional commitment, quality, professionalism, and willingness to help the platform grow during its early stages.</p>
+              <p>The top 15 Founding Authors, as determined by platform review criteria, may receive a grant of Ixonian credits.</p>
+              <p>These credits may be used for various platform features, including:</p>
+              <ul class="details-list details-grid">
+                <li>Book promotion</li>
+                <li>Profile enhancement tools</li>
+                <li>Advertising opportunities</li>
+                <li>Featured placements</li>
+                <li>Visibility boosts</li>
+                <li>Author development tools</li>
+                <li>Future premium features</li>
+              </ul>
+              <p>The purpose of these rewards is to encourage participation and support dedicated authors while maintaining fairness across the platform.</p>
+              <div class="detail-note"><strong>Added detail:</strong> The amount of credits awarded, eligibility requirements, ranking methods, and distribution schedule may change as the platform develops.</div>
+              <div class="detail-note"><strong>Added detail:</strong> Receiving credits does not guarantee future earnings, increased readership, or commercial success.</div>
+            </section>
+
+            <section class="detail-block">
+              <h2 class="detail-heading"><span class="detail-icon icon-recommend" aria-hidden="true"></span>Increased Recommendation Opportunities</h2>
+              <p>Founding Authors may receive increased opportunities for content discovery during a designated founding period.</p>
+              <p>Books published by Founding Authors may receive additional consideration within recommendation systems, featured sections, promotional programs, search placements, author spotlights, or other discovery features available on the platform.</p>
+              <p>The expected recommendation period may range from approximately one to five years depending on various factors including:</p>
+              <ul class="details-list details-grid">
+                <li>Author activity</li>
+                <li>Book quality</li>
+                <li>Community engagement</li>
+                <li>Reader response</li>
+                <li>Platform participation</li>
+                <li>Compliance with platform standards</li>
+              </ul>
+              <p>Books and profiles may be evaluated by both the Ixonian team and the community. Factors that may influence ranking and discoverability include:</p>
+              <ul class="details-list details-grid">
+                <li>Originality</li>
+                <li>Reader engagement</li>
+                <li>Reviews</li>
+                <li>Completion rates</li>
+                <li>Writing quality</li>
+                <li>Platform activity</li>
+                <li>Community reputation</li>
+              </ul>
+              <div class="detail-note"><strong>Added detail:</strong> Recommendation systems may change over time as the platform evolves and no recommendation placement can be guaranteed.</div>
+            </section>
+
+            <section class="detail-block">
+              <h2 class="detail-heading"><span class="detail-icon icon-spots" aria-hidden="true"></span>Limited Founding Author Positions</h2>
+              <p>The Founding Author Program is intended to remain selective during the platform's early development. Submitting an application does not guarantee acceptance.</p>
+              <p>All applications will be reviewed by the Ixonian team and may be evaluated using a combination of factors such as writing quality, professionalism, originality, platform fit, experience, and overall potential contribution to the community.</p>
+              <p>Applicants may be contacted by email if additional information, clarification, writing samples, or verification is required.</p>
+              <p>At the current stage of planning, Ixonian expects to accept approximately 70 to 130 Founding Authors.</p>
+              <div class="detail-note"><strong>Added detail:</strong> This number may increase or decrease depending on application quality, platform growth, staffing resources, and community needs.</div>
+            </section>
+
+            <section class="detail-block">
+              <h2 class="detail-heading"><span class="detail-icon icon-earnings" aria-hidden="true"></span>Earnings From Views, Reads, and Engagement</h2>
+              <p>Ixonian plans to provide opportunities for authors to earn rewards based on platform activity and audience engagement.</p>
+              <p>Views, reads, engagement metrics, participation, and other performance indicators may contribute toward an author balance according to the platform's earning system.</p>
+              <p>Once an author's balance reaches the applicable withdrawal threshold, which is currently expected to range between approximately $30 and $100 USD, the author may become eligible to request a payout.</p>
+              <p>Founding Authors may receive enhanced earning opportunities during their introductory period on the platform, which may last between one and five years.</p>
+              <p>Authors may also choose to convert portions of their balance into Ixonian credits for use throughout the platform. Credits may potentially be used for:</p>
+              <ul class="details-list details-grid">
+                <li>Book promotion</li>
+                <li>Advertising</li>
+                <li>Profile customization</li>
+                <li>Premium profile features</li>
+                <li>Special author tools</li>
+                <li>Visibility enhancements</li>
+                <li>Tags and categorization features</li>
+                <li>Future platform services</li>
+              </ul>
+              <div class="detail-note"><strong>Added detail:</strong> Earnings programs, conversion rates, withdrawal limits, processing times, payout methods, and eligibility requirements may change as the platform develops.</div>
+              <div class="detail-note"><strong>Added detail:</strong> Earnings are not guaranteed and may vary significantly between authors.</div>
+            </section>
+
+            <section class="detail-block">
+              <h2 class="detail-heading"><span class="detail-icon icon-referral" aria-hidden="true"></span>Referral Reward Program</h2>
+              <p>Ixonian may provide authors with a personal referral code that can be shared with readers, friends, followers, or other creators.</p>
+              <p>When a new user successfully joins the platform through an author's referral code, the user may receive a promotional discount or introductory benefit.</p>
+              <p>The referring author may also receive a reward, which is currently expected to be approximately $1 to $2 per successful qualifying referral.</p>
+              <p>There is currently no planned maximum earning limit for referral rewards. As authors grow their audience and increase their visibility, referral earnings may increase accordingly.</p>
+              <div class="detail-note"><strong>Added detail:</strong> Referral rewards may be subject to fraud prevention measures, eligibility requirements, account verification procedures, and platform review.</div>
+              <div class="detail-note"><strong>Added detail:</strong> Ixonian reserves the right to modify referral reward amounts, requirements, or program availability at any time.</div>
+            </section>
+
+            <section class="detail-block">
+              <h2 class="detail-heading"><span class="detail-icon icon-content" aria-hidden="true"></span>Original Content and Quality Requirements</h2>
+              <p>Ixonian is committed to supporting original creators and protecting intellectual property rights.</p>
+              <p>Authors must only upload content that they personally created or have the legal right to publish, distribute, and license.</p>
+              <p>The following activities are prohibited:</p>
+              <ul class="details-list details-grid">
+                <li>Plagiarism</li>
+                <li>Content theft</li>
+                <li>Unauthorized reproduction</li>
+                <li>Copyright infringement</li>
+                <li>Misrepresentation of authorship</li>
+                <li>Fraudulent publishing practices</li>
+                <li>Uploading content without proper rights</li>
+              </ul>
+              <p>Authors found engaging in prohibited activities may face actions including:</p>
+              <ul class="details-list details-grid">
+                <li>Content removal</li>
+                <li>Account suspension</li>
+                <li>Account termination</li>
+                <li>Loss of earnings</li>
+                <li>Removal of credits</li>
+                <li>Removal of titles</li>
+                <li>Permanent platform restrictions</li>
+              </ul>
+              <p>AI-assisted writing may be permitted when used responsibly. However, authors may not submit fully copied, automatically generated, misleading, deceptive, or falsely claimed content as entirely original work.</p>
+              <div class="detail-note"><strong>Added detail:</strong> Ixonian may review content manually or through automated systems to help identify potential policy violations.</div>
+            </section>
+
+            <section class="detail-block">
+              <h2 class="detail-heading"><span class="detail-icon icon-rights" aria-hidden="true"></span>Author Rights and Publishing License</h2>
+              <p>Authors remain credited for their original books, stories, novels, articles, and other creative works.</p>
+              <p>By uploading content to Ixonian, authors grant Ixonian a license to host, display, distribute, promote, recommend, reproduce, and make the content available to users through platform services and features.</p>
+              <p>This license is provided solely for operating, improving, marketing, and maintaining the platform in accordance with applicable terms and policies.</p>
+              <p>Authors should only upload content that they own or have legal authorization to publish. Nothing in this section should be interpreted as transferring ownership of an author's original work to Ixonian unless otherwise specified in separate agreements.</p>
+              <div class="detail-note"><strong>Added detail:</strong> Authors are responsible for ensuring they possess all necessary rights, permissions, licenses, and approvals required to publish submitted content.</div>
+            </section>
+
+            <section class="detail-block">
+              <h2 class="detail-heading"><span class="detail-icon icon-change" aria-hidden="true"></span>Program Changes and Future Development</h2>
+              <p>Ixonian is a growing platform and many features, benefits, programs, rewards, titles, systems, and opportunities may continue to evolve over time.</p>
+              <p>As the platform develops, certain aspects of the Founding Author Program may be expanded, modified, replaced, suspended, or discontinued.</p>
+              <p>Ixonian reserves the right to update program requirements, eligibility criteria, reward structures, earning systems, recommendation systems, and platform features when necessary.</p>
+              <p>Any future changes will be implemented with the goal of improving the overall experience for authors and readers.</p>
+              <div class="detail-note"><strong>Added detail:</strong> Participation in the Founding Author Program constitutes acknowledgment that platform features and benefits may change as the service evolves.</div>
+            </section>
+
+            <section class="detail-block">
+              <h2 class="detail-heading"><span class="detail-icon icon-message" aria-hidden="true"></span>Final Message</h2>
+              <p>We sincerely appreciate your interest in helping build Ixonian from the ground up.</p>
+              <p>Founding Authors represent the earliest voices, stories, and creative foundations of the platform. Whether you are an experienced author or a new writer seeking an opportunity to grow, we thank you for considering Ixonian as part of your publishing journey.</p>
+              <p>We look forward to reviewing your application and learning more about your work.</p>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <div class="footer-brand-col">
+            <img src="Ixonian white.png" alt="Ixonian" class="footer-logo-img">
+            <p class="tagline">Be <em>Ixonian</em> from the start</p>
+          </div>
+
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="index.html">Application</a>
+            <a href="privacy-policy.html">Policy</a>
+            <a href="more-details.html">Details</a>
+          </div>
+
+          <div class="footer-col">
+            <h4>Support</h4>
+            <a href="index.html#footerContact">Help</a>
+            <a href="index.html#footerContact">Contact</a>
+            <a href="index.html#footerContact">FAQ</a>
+          </div>
+
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <a href="privacy-policy.html">Terms</a>
+            <a href="privacy-policy.html">Privacy</a>
+            <a href="index.html">Sign up</a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 Ixonian. All rights reserved.</p>
+          <p>Not just a book, it's a lesson</p>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    const moreBtn = document.getElementById("moreBtn");
+    const moreMenu = document.getElementById("moreMenu");
+
+    const closeMoreMenu = () => {
+      if (!moreBtn || !moreMenu) return;
+      moreMenu.hidden = true;
+      moreBtn.setAttribute("aria-expanded", "false");
+    };
+
+    if (moreBtn && moreMenu) {
+      moreBtn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const willOpen = moreMenu.hidden;
+        moreMenu.hidden = !willOpen;
+        moreBtn.setAttribute("aria-expanded", String(willOpen));
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!moreMenu.contains(event.target) && event.target !== moreBtn) {
+          closeMoreMenu();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeMoreMenu();
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="Ixonian (BN:A) (B).png" />
+  <title>Privacy Policy - Ixonian</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background:
+        linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+        url("Screenshot 2026-06-17 at 14.47.07.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    .hero {
+      width: 100%;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      padding-top: 90px;
+    }
+
+    .top-area {
+      height: 90px;
+      background: #000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .header-left {
+      position: absolute;
+      top: 0;
+      left: max(0px, calc((100vw - 1100px) / 2 + 20px));
+      height: 90px;
+      background: #000;
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-box {
+      display: flex;
+      align-items: center;
+      border: 1px solid white;
+      padding: 0 14px 0 0;
+    }
+
+    .logo-box {
+      width: auto;
+      height: auto;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-img {
+      width: 55px;
+      height: auto;
+      display: block;
+    }
+
+    .header-brand-text {
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+    }
+
+    .header-brand-name {
+      font-family: "Times New Roman", serif;
+      font-size: 1.3rem;
+      font-weight: 100;
+      font-style: normal;
+      color: rgb(255, 255, 255);
+      letter-spacing: 9px;
+      line-height: 1;
+    }
+
+    .header-brand-tagline {
+      font-size: 9px;
+      font-style: italic;
+      color: rgba(255,255,255,.6);
+      font-weight: 300;
+      letter-spacing: 1px;
+      margin-top: 1px;
+    }
+
+    .more-btn {
+      position: absolute;
+      top: 50%;
+      right: max(22px, calc((100vw - 1100px) / 2 + 20px));
+      width: 140px;
+      height: 38px;
+      transform: translateY(-50%);
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+      color: rgba(255,255,255,.85);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,.1),
+        inset 0 -1px 2px rgba(0,0,0,.4),
+        0 4px 12px rgba(0,0,0,.5);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .more-btn:hover {
+      background: linear-gradient(135deg, #333 0%, #222 100%);
+      border-color: rgba(255,255,255,.25);
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,.12),
+        inset 0 -1px 2px rgba(0,0,0,.4),
+        0 4px 16px rgba(0,0,0,.6);
+    }
+
+    .more-chevron {
+      font-size: 14px;
+      color: rgba(255,255,255,.5);
+      margin-top: 1px;
+    }
+
+    /* ===== Privacy Content ===== */
+    .privacy-section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .privacy-card {
+      background: rgba(10, 12, 20, 0.88);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow:
+        0 8px 32px rgba(0,0,0,.5),
+        inset 0 1px 0 rgba(255,255,255,.05);
+      padding: 48px 44px;
+    }
+
+    .privacy-card h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 36px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #fff;
+      letter-spacing: 0;
+    }
+
+    .privacy-card .last-updated {
+      font-size: 13px;
+      color: rgba(255,255,255,.45);
+      margin-bottom: 32px;
+      font-style: italic;
+    }
+
+    .privacy-card h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: #5e8d91;
+      margin: 36px 0 14px 0;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .privacy-card h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: rgba(255,255,255,.85);
+      margin: 24px 0 10px 0;
+    }
+
+    .privacy-card p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(255,255,255,.78);
+      margin-bottom: 14px;
+    }
+
+    .privacy-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 16px 20px;
+    }
+
+    .privacy-card ul li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255,255,255,.75);
+      margin-bottom: 4px;
+    }
+
+    .privacy-card ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #5e8d91;
+    }
+
+    .privacy-card a {
+      color: #4a9eff;
+      text-decoration: underline;
+    }
+
+    .privacy-card a:hover {
+      color: #7ab8ff;
+    }
+
+    .privacy-card strong {
+      color: rgba(255,255,255,.92);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,.5);
+      font-size: 14px;
+      text-decoration: none;
+      margin-bottom: 24px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: rgba(255,255,255,.8);
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      width: 100%;
+      background: #0a0d14;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 50px 20px 30px;
+      margin-top: 80px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer-brand-col .footer-logo-img {
+      width: 160px;
+      height: auto;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand-col .tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,.45);
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .footer-col h4 {
+      color: rgba(255,255,255,.7);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .footer-col a {
+      display: block;
+      color: rgba(255,255,255,.4);
+      font-size: 14px;
+      line-height: 2;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: rgba(255,255,255,.75);
+    }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 30px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-bottom p {
+      color: rgba(255,255,255,.25);
+      font-size: 12px;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 760px) {
+      .top-area {
+        height: 80px;
+      }
+
+      .header-left {
+        height: 80px;
+      }
+
+      .brand-box {
+        padding: 0 10px 0 0;
+      }
+
+      .logo-img {
+        width: 40px;
+      }
+
+      .header-brand-name {
+        font-size: 1.1rem;
+        letter-spacing: 4px;
+      }
+
+      .header-brand-text {
+        margin-left: 6px;
+      }
+
+      .more-btn {
+        width: 110px;
+        height: 34px;
+        font-size: 13px;
+      }
+
+      .privacy-card {
+        padding: 28px 20px;
+      }
+
+      .privacy-card h1 {
+        font-size: 28px;
+      }
+
+      .privacy-card h2 {
+        font-size: 19px;
+      }
+
+      .footer {
+        padding: 40px 20px 24px;
+        margin-top: 50px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .privacy-card {
+        padding: 20px 16px;
+      }
+
+      .privacy-card h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="page">
+    <section class="hero">
+
+      <header class="top-area">
+        <div class="header-left">
+          <div class="brand-box">
+            <div class="logo-box">
+              <img src="Ixonian (BN:A) (w).png" alt="Ixonian" class="logo-img">
+            </div>
+            <div class="header-brand-text">
+              <div class="header-brand-name">IXONIAN</div>
+              <div class="header-brand-tagline">Not just a book, it's a lesson</div>
+            </div>
+          </div>
+        </div>
+
+        <a href="index.html" class="more-btn">
+          Home
+          <span class="more-chevron">←</span>
+        </a>
+      </header>
+
+      <!-- Privacy Content -->
+      <section class="privacy-section">
+        <div class="privacy-card">
+
+          <a href="index.html" class="back-link">← Back to Home</a>
+
+          <h1>Privacy Policy</h1>
+          <p class="last-updated">Last updated: June 2026</p>
+
+          <p>
+            Ixonian ("we," "our," or "us") respects your privacy and is committed to protecting the personal information you share with us. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit or use the Ixonian platform.
+          </p>
+
+          <p>
+            By accessing or using Ixonian, you agree to the terms of this Privacy Policy. If you do not agree with the practices described here, please do not use our platform.
+          </p>
+
+          <h2>1. Information We Collect</h2>
+
+          <h3>A. Information You Provide Directly</h3>
+          <ul>
+            <li><strong>Account Information:</strong> When you create an account or sign up with Google, we may collect your full name, email address, and profile information.</li>
+            <li><strong>Application Information:</strong> When applying to become a Founding Author, we may collect your writing experience, book details, and other information you submit.</li>
+            <li><strong>Communications:</strong> If you contact us by email or through the platform, we may collect your message and contact details.</li>
+          </ul>
+
+          <h3>B. Information Collected Automatically</h3>
+          <ul>
+            <li><strong>Device and Usage Data:</strong> We may automatically collect information about your device, browser type, IP address, operating system, and how you interact with Ixonian.</li>
+            <li><strong>Cookies and Storage:</strong> We use essential cookies and browser local storage for login, security, and authentication purposes. You can manage cookie preferences through your browser settings.</li>
+          </ul>
+
+          <h3>C. Information from Third Parties</h3>
+          <ul>
+            <li><strong>Google Sign-Up:</strong> If you choose to sign up using Google, we may receive your name, email address, and profile picture from Google as part of the authentication process.</li>
+          </ul>
+
+          <h2>2. How We Use Your Information</h2>
+          <p>We use the information we collect for the following purposes:</p>
+          <ul>
+            <li>To create and manage your account</li>
+            <li>To process and review Founding Author applications</li>
+            <li>To provide, operate, and maintain the Ixonian platform</li>
+            <li>To communicate with you about your account, applications, and platform updates</li>
+            <li>To improve and personalize your experience on Ixonian</li>
+            <li>To ensure security, prevent fraud, and enforce our Terms of Service</li>
+            <li>To comply with legal obligations</li>
+          </ul>
+
+          <h2>3. Cookies and Local Storage</h2>
+          <p>
+            Ixonian uses essential cookies and browser local storage for the following purposes:
+          </p>
+          <ul>
+            <li><strong>Authentication:</strong> To keep you logged in and manage your session securely</li>
+            <li><strong>Security:</strong> To protect against unauthorized access and fraudulent activity</li>
+            <li><strong>Preferences:</strong> To remember your cookie consent choices</li>
+          </ul>
+          <p>
+            You may disable cookies through your browser settings. However, please note that doing so may affect certain features and functionality of the Ixonian platform.
+          </p>
+
+          <h2>4. How We Share Your Information</h2>
+          <p>We do not sell your personal information. We may share your information only in the following circumstances:</p>
+          <ul>
+            <li><strong>Service Providers:</strong> With trusted third-party service providers who help us operate the platform (e.g., hosting, analytics, authentication). These providers are contractually bound to protect your data.</li>
+            <li><strong>Legal Compliance:</strong> When required by law, court order, or governmental authority, or to protect the rights, safety, and property of Ixonian, our users, or others.</li>
+            <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction. You will be notified of any such change.</li>
+          </ul>
+
+          <h2>5. Data Security</h2>
+          <p>
+            We take reasonable technical and organizational measures to protect your personal information from unauthorized access, loss, misuse, or alteration. TWe use reasonable security measures, including trusted hosting services, access controls, and platform security features provided by our service providers. However, no method of transmission or storage is 100% secure, and we cannot guarantee absolute security.
+          </p>
+
+          <h2>6. Data Retention</h2>
+          <p>
+            We retain your personal information for as long as your account is active or as needed to provide you with the Ixonian platform. We may also retain certain information as necessary to comply with legal obligations, resolve disputes, and enforce our agreements. When data is no longer required, we will securely delete or anonymize it.
+          </p>
+
+          <h2>7. Your Rights and Choices</h2>
+          <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+          <ul>
+            <li><strong>Access:</strong> Request a copy of the personal data we hold about you</li>
+            <li><strong>Correction:</strong> Request that we correct any inaccurate or incomplete data</li>
+            <li><strong>Deletion:</strong> Request that we delete your personal data, subject to legal obligations</li>
+            <li><strong>Restriction:</strong> Request that we restrict the processing of your data</li>
+            <li><strong>Portability:</strong> Request a copy of your data in a structured, machine-readable format</li>
+            <li><strong>Objection:</strong> Object to the processing of your personal data for certain purposes</li>
+          </ul>
+          <p>
+            To exercise any of these rights, please contact us at the email address provided below. We will respond to your request within the timeframe required by applicable law.
+          </p>
+
+          <h2>8. Third-Party Links</h2>
+          <p>
+            Ixonian may contain links to third-party websites or services. We are not responsible for the privacy practices or content of those third parties. We encourage you to read their privacy policies before providing any personal information.
+          </p>
+
+          <h2>9. Children's Privacy</h2>
+          <p>
+            Ixonian, (founding Authors) is not intended for individuals under the age of 17. We do not knowingly collect personal information from minors. If we become aware that a minor has provided us with personal data, we will take steps to delete such information. If you believe a minor has submitted personal data to us, please contact us immediately. This does not mean that we do not allow minors to use our platform, but they could not sign up for an account or apply to become a Founding Author.
+          </p>
+
+          <h2>10. International Data Transfers</h2>
+          <p>
+            Your information may be transferred to and processed in countries other than your own. We take appropriate safeguards to ensure that your data receives adequate protection in accordance with this Privacy Policy and applicable law.
+          </p>
+
+          <h2>11. Changes to This Privacy Policy</h2>
+          <p>
+            We may update this Privacy Policy from time to time. When we make changes, we will revise the "Last updated" date at the top of this page. We encourage you to review this Privacy Policy periodically to stay informed about how we are protecting your information.
+          </p>
+
+          <h2>12. Contact Us</h2>
+          <p>
+            If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us at:
+          </p>
+          <p>
+            <strong>Email:</strong> privacy@ixonian.com<br>
+            <strong>Ixonian Platform</strong>
+          </p>
+
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <div class="footer-brand-col">
+            <img src="Ixonian white.png" alt="Ixonian" class="footer-logo-img">
+            <p class="tagline">Be <em>Ixonian</em> from the start</p>
+          </div>
+
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#">About</a>
+            <a href="#">Policy</a>
+            <a href="#">Details</a>
+          </div>
+
+          <div class="footer-col">
+            <h4>Support</h4>
+            <a href="#">Help</a>
+            <a href="#">Contact</a>
+            <a href="#">FAQ</a>
+          </div>
+
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <a href="privacy-policy.html">Terms</a>
+            <a href="privacy-policy.html">Privacy</a>
+            <a href="#">Sign up</a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 Ixonian. All rights reserved.</p>
+          <p>Not just a book, it's a lesson</p>
+        </div>
+      </footer>
+
+    </section>
+  </main>
+
+</body>
+</html>

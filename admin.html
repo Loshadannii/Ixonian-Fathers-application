@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="Ixonian (BN:A) (B).png" />
+  <title>Admin Dashboard - Ixonian</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      color-scheme: dark;
+      --surface: rgba(10, 11, 13, 0.94);
+      --surface-soft: rgba(255, 255, 255, 0.055);
+      --border: rgba(255, 255, 255, 0.12);
+      --muted: rgba(255, 255, 255, 0.58);
+      --gold: #e8c45d;
+      --green: #64c987;
+      --red: #ef6b6b;
+      --blue: #70a9e8;
+      --purple: #c58be2;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.9)),
+        url("Screenshot 2026-06-17 at 14.47.07.png") center / cover fixed;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .top-area {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      height: 82px;
+      background: #000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .header-inner {
+      width: min(1240px, calc(100% - 40px));
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand-box {
+      display: flex;
+      align-items: center;
+      border: 1px solid #fff;
+      padding-right: 14px;
+    }
+
+    .logo-img {
+      width: 50px;
+      display: block;
+    }
+
+    .header-brand-text {
+      margin-left: 9px;
+    }
+
+    .header-brand-name {
+      font-family: "Times New Roman", serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 7px;
+      line-height: 1;
+    }
+
+    .header-brand-tagline {
+      margin-top: 3px;
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 9px;
+      font-style: italic;
+      letter-spacing: 1px;
+    }
+
+    .sign-out-btn {
+      min-width: 116px;
+      height: 38px;
+      padding: 0 18px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #171717;
+      color: #fff;
+      cursor: pointer;
+      transition: border-color 160ms ease, background 160ms ease;
+    }
+
+    .sign-out-btn:hover {
+      background: #232323;
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .dashboard {
+      width: min(1240px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 52px 0 80px;
+    }
+
+    .page-heading {
+      margin-bottom: 30px;
+    }
+
+    .eyebrow {
+      margin-bottom: 8px;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      border: 1px solid var(--border);
+      background: var(--surface);
+      margin-bottom: 22px;
+    }
+
+    .stat {
+      min-width: 0;
+      padding: 18px;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat:last-child {
+      border-right: 0;
+    }
+
+    .stat-value {
+      display: block;
+      margin-bottom: 5px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 27px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(230px, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 26px;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 44px;
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      outline: none;
+      background: rgba(0, 0, 0, 0.86);
+      color: #fff;
+    }
+
+    .search-input:focus {
+      border-color: rgba(232, 196, 93, 0.7);
+      box-shadow: 0 0 0 3px rgba(232, 196, 93, 0.1);
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    .filter-btn,
+    .action-btn,
+    .copy-btn,
+    .save-note-btn {
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      background: #151515;
+      color: rgba(255, 255, 255, 0.82);
+      cursor: pointer;
+      transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+    }
+
+    .filter-btn {
+      min-height: 36px;
+      padding: 7px 11px;
+      font-size: 12px;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.is-active {
+      border-color: rgba(232, 196, 93, 0.62);
+      background: rgba(232, 196, 93, 0.12);
+      color: #fff;
+    }
+
+    .state-message {
+      padding: 32px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .state-message strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #fff;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 22px;
+    }
+
+    .applications-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .application-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
+      overflow: hidden;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .applicant-name {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    .applicant-email {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .status-badge {
+      flex-shrink: 0;
+      padding: 7px 10px;
+      border: 1px solid currentColor;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .status-pending { color: var(--gold); }
+    .status-founding-author { color: var(--green); }
+    .status-rejected { color: var(--red); }
+    .status-waitlist { color: var(--blue); }
+    .status-needs-more-info { color: var(--purple); }
+
+    .card-body {
+      padding: 22px 24px 24px;
+    }
+
+    .metadata-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1.3fr 1.3fr;
+      gap: 1px;
+      margin-bottom: 22px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .metadata-item {
+      min-width: 0;
+      padding: 13px;
+      background: #111214;
+    }
+
+    .metadata-label,
+    .answer-label,
+    .note-label {
+      display: block;
+      margin-bottom: 6px;
+      color: rgba(255, 255, 255, 0.42);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .metadata-value {
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 13px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .answers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .answer-block {
+      min-width: 0;
+      padding: 16px;
+      border-left: 2px solid rgba(232, 196, 93, 0.42);
+      background: var(--surface-soft);
+    }
+
+    .answer-text {
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 14px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .review-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: end;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .admin-note {
+      width: 100%;
+      min-height: 88px;
+      resize: vertical;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      outline: none;
+      background: #080808;
+      color: #fff;
+      line-height: 1.5;
+    }
+
+    .admin-note:focus {
+      border-color: rgba(232, 196, 93, 0.65);
+    }
+
+    .save-note-btn,
+    .copy-btn {
+      min-height: 40px;
+      padding: 9px 14px;
+    }
+
+    .status-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .action-btn {
+      min-height: 38px;
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+
+    .action-btn:hover,
+    .save-note-btn:hover,
+    .copy-btn:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: #242424;
+      color: #fff;
+    }
+
+    button:disabled,
+    textarea:disabled {
+      cursor: wait;
+      opacity: 0.55;
+    }
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 50;
+      max-width: min(390px, calc(100vw - 40px));
+      padding: 14px 18px;
+      border: 1px solid rgba(100, 201, 135, 0.5);
+      border-radius: 6px;
+      background: #050505;
+      box-shadow: 0 14px 42px rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 14px;
+      transform: translateY(16px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .toast.is-visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.is-error {
+      border-color: rgba(239, 107, 107, 0.65);
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 1050px) {
+      .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .stat:nth-child(3) {
+        border-right: 0;
+      }
+
+      .stat:nth-child(-n + 3) {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-group {
+        justify-content: flex-start;
+      }
+
+      .metadata-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .header-inner,
+      .dashboard {
+        width: min(100% - 28px, 1240px);
+      }
+
+      .header-brand-tagline {
+        display: none;
+      }
+
+      .header-brand-name {
+        font-size: 1rem;
+        letter-spacing: 4px;
+      }
+
+      .logo-img {
+        width: 42px;
+      }
+
+      .sign-out-btn {
+        min-width: 92px;
+        padding: 0 12px;
+      }
+
+      .dashboard {
+        padding-top: 34px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat,
+      .stat:nth-child(3) {
+        border-right: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .stat:nth-child(even) {
+        border-right: 0;
+      }
+
+      .stat:nth-last-child(-n + 2) {
+        border-bottom: 0;
+      }
+
+      .card-header,
+      .card-body {
+        padding-left: 17px;
+        padding-right: 17px;
+      }
+
+      .card-header {
+        flex-direction: column;
+      }
+
+      .metadata-grid,
+      .answers,
+      .review-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .save-note-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top-area">
+    <div class="header-inner">
+      <div class="brand-box">
+        <img src="Ixonian (BN:A) (w).png" alt="Ixonian" class="logo-img" />
+        <div class="header-brand-text">
+          <div class="header-brand-name">IXONIAN</div>
+          <div class="header-brand-tagline">Not just a book, it's a lesson</div>
+        </div>
+      </div>
+      <button class="sign-out-btn" id="adminSignOutBtn" type="button">Sign Out</button>
+    </div>
+  </header>
+
+  <main class="dashboard">
+    <div class="page-heading">
+      <p class="eyebrow">Management</p>
+      <h1>Ixonian Admin Dashboard</h1>
+      <p class="subtitle">Review Founding Author applications</p>
+    </div>
+
+    <section id="adminLoading" class="state-message" aria-live="polite">
+      Checking admin access...
+    </section>
+
+    <section id="accessDenied" class="state-message" hidden>
+      <strong>Access denied</strong>
+      Your signed-in Firebase UID is not listed in the admins collection.
+    </section>
+
+    <div id="dashboardContent" hidden>
+      <section class="stats-grid" aria-label="Application statistics">
+        <div class="stat"><span class="stat-value" id="totalCount">0</span><span class="stat-label">Total applications</span></div>
+        <div class="stat"><span class="stat-value" id="pendingCount">0</span><span class="stat-label">Pending</span></div>
+        <div class="stat"><span class="stat-value" id="acceptedCount">0</span><span class="stat-label">Accepted</span></div>
+        <div class="stat"><span class="stat-value" id="rejectedCount">0</span><span class="stat-label">Rejected</span></div>
+        <div class="stat"><span class="stat-value" id="waitlistCount">0</span><span class="stat-label">Waitlist</span></div>
+        <div class="stat"><span class="stat-value" id="needsInfoCount">0</span><span class="stat-label">Needs Info</span></div>
+      </section>
+
+      <section class="toolbar" aria-label="Application controls">
+        <input class="search-input" id="applicationSearch" type="search" placeholder="Search by name or email" autocomplete="off" />
+        <div class="filter-group" id="filterGroup">
+          <button class="filter-btn is-active" type="button" data-filter="all">All</button>
+          <button class="filter-btn" type="button" data-filter="pending">Pending</button>
+          <button class="filter-btn" type="button" data-filter="founding-author">Founding Author</button>
+          <button class="filter-btn" type="button" data-filter="rejected">Rejected</button>
+          <button class="filter-btn" type="button" data-filter="waitlist">Waitlist</button>
+          <button class="filter-btn" type="button" data-filter="needs-more-info">Needs More Info</button>
+        </div>
+      </section>
+
+      <div id="applicationsState" class="state-message">Loading applications...</div>
+      <section class="applications-list" id="applicationsList" aria-live="polite"></section>
+    </div>
+  </main>
+
+  <div class="toast" id="adminToast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="./admin.js"></script>
+</body>
+</html>
