@@ -279,7 +279,7 @@ const createApplicationCard = (application) => {
   metadata.className = "metadata-grid";
   metadata.append(
     createMetadataItem("UID", application.uid || "Not provided"),
-    createMetadataItem("Over 17", application.over17 === true ? "Yes" : "No"),
+    createMetadataItem("Over 18", application.over17 === true ? "Yes" : "No"),
     createMetadataItem("Submitted", formatDate(application.submittedAt)),
     createMetadataItem("Reviewed", formatDate(application.reviewedAt)),
     createMetadataItem("Reviewed by UID", application.reviewedBy || "Not reviewed"),
