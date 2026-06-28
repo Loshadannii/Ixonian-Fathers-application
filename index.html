@@ -129,41 +129,39 @@
       position: absolute;
       top: 50%;
       right: max(22px, calc((100vw - 1100px) / 2 + 20px));
-      width: 140px;
+      width: 40px;
       height: 38px;
       transform: translateY(-50%);
-      border-radius: 50px;
-      border: 1px solid rgba(255,255,255,.15);
-      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+      border-radius: 6px;
+      border: 1px solid transparent;
+      background: transparent;
       color: rgba(255,255,255,.85);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 14px;
-      letter-spacing: 1.5px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      box-shadow:
-        inset 0 1px 1px rgba(255,255,255,.1),
-        inset 0 -1px 2px rgba(0,0,0,.4),
-        0 4px 12px rgba(0,0,0,.5);
       cursor: pointer;
       transition: all 0.2s ease;
+      padding: 0;
     }
 
     .more-btn:hover {
-      background: linear-gradient(135deg, #333 0%, #222 100%);
-      border-color: rgba(255,255,255,.25);
-      box-shadow:
-        inset 0 1px 1px rgba(255,255,255,.12),
-        inset 0 -1px 2px rgba(0,0,0,.4),
-        0 4px 16px rgba(0,0,0,.6);
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.15);
+    }
+
+    .more-btn span {
+      width: 24px;
+      height: 2px;
+      background: rgba(255,255,255,.85);
+      border-radius: 1px;
+      display: block;
+      transition: all 0.2s ease;
     }
 
     .more-chevron {
-      font-size: 14px;
-      color: rgba(255,255,255,.5);
-      margin-top: 1px;
+      display: none;
     }
 
     .more-menu {
@@ -286,11 +284,17 @@
       flex: 1;
       min-height: 0;
       overflow-y: auto;
-      overscroll-behavior: contain;
       -webkit-overflow-scrolling: touch;
       contain: content;
       scrollbar-width: thin;
       scrollbar-color: rgba(58, 80, 92, .5) rgba(255,255,255,.24);
+    }
+
+    /* iOS devices only: prevent page scroll when scrolling through info-card */
+    @supports (-webkit-touch-callout: none) {
+      .info-card {
+        overscroll-behavior: contain;
+      }
     }
 
     .collapsible-image {
@@ -1261,9 +1265,9 @@
       }
 
       .more-btn {
-        width: 110px;
-        height: 34px;
-        font-size: 13px;
+        width: 40px;
+        height: 38px;
+        right: 16px;
       }
 
       .more-menu {
@@ -1404,9 +1408,10 @@
           </div>
         </div>
 
-        <button class="more-btn" id="moreBtn" type="button" aria-expanded="false" aria-controls="moreMenu">
-          More
-          <span class="more-chevron">▼</span>
+        <button class="more-btn" id="moreBtn" type="button" aria-expanded="false" aria-controls="moreMenu" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
 
         <div class="more-menu" id="moreMenu" hidden>
@@ -1753,6 +1758,33 @@ Authors should only upload work they created themselves or have the legal right 
       continueBtn.addEventListener("click", () => {
         formPanel.scrollIntoView({ behavior: "smooth", block: "start" });
       });
+    }
+
+    // Enable page scrolling when scrolling through info-card on non-iOS devices
+    const infoCard = document.getElementById("infoCard");
+    if (infoCard && !(/iPhone|iPad|iPod/.test(navigator.userAgent))) {
+      let lastScrollTop = 0;
+      
+      infoCard.addEventListener("scroll", () => {
+        const scrollTop = infoCard.scrollTop;
+        const isScrollingDown = scrollTop > lastScrollTop;
+        const isAtBottom = Math.abs((infoCard.scrollHeight - infoCard.scrollTop - infoCard.clientHeight)) < 5;
+        
+        if (isScrollingDown && isAtBottom) {
+          // Allow page to scroll when at bottom
+          document.documentElement.style.overscrollBehavior = "auto";
+        } else {
+          // Contain scroll within info-card
+          document.documentElement.style.overscrollBehavior = "none";
+        }
+        
+        lastScrollTop = scrollTop;
+      }, { passive: true });
+      
+      // Reset on touch end
+      infoCard.addEventListener("touchend", () => {
+        document.documentElement.style.overscrollBehavior = "auto";
+      }, { passive: true });
     }
 
     // Cookie consent banner
