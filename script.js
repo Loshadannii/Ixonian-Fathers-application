@@ -48,6 +48,7 @@ const emailNotification = document.getElementById("emailNotification");
 const emailNotificationTitle = document.getElementById("emailNotificationTitle");
 const emailNotificationText = document.getElementById("emailNotificationText");
 const emailNotificationClose = document.getElementById("emailNotificationClose");
+const emailNotificationVerifyBtn = document.getElementById("emailNotificationVerifyBtn");
 const continueBtn = document.querySelector(".continue-btn");
 const submitBtn = form?.querySelector('button[type="submit"]');
 const submitGateMessage = document.getElementById("submitGateMessage");
@@ -104,6 +105,7 @@ const clearFieldErrors = () => {
 };
 
 let emailNotificationTimer = null;
+let currentVerificationLink = null;
 
 const hideEmailNotification = () => {
   if (!emailNotification) return;
@@ -111,10 +113,10 @@ const hideEmailNotification = () => {
   emailNotification.classList.remove("show");
   window.setTimeout(() => {
     emailNotification.hidden = true;
-  }, 220);
+  }, 300);
 };
 
-const showEmailNotification = (title, message) => {
+const showEmailNotification = (title, message, verificationLink = null) => {
   if (!emailNotification || !emailNotificationTitle || !emailNotificationText) {
     console.log(`${title}: ${message}`);
     return;
@@ -124,18 +126,29 @@ const showEmailNotification = (title, message) => {
     window.clearTimeout(emailNotificationTimer);
   }
 
+  currentVerificationLink = verificationLink;
   emailNotificationTitle.textContent = title;
   emailNotificationText.textContent = message;
   emailNotification.hidden = false;
   window.requestAnimationFrame(() => {
     emailNotification.classList.add("show");
   });
-
-  emailNotificationTimer = window.setTimeout(hideEmailNotification, 7000);
 };
 
 if (emailNotificationClose) {
   emailNotificationClose.addEventListener("click", hideEmailNotification);
+}
+
+if (emailNotificationVerifyBtn) {
+  emailNotificationVerifyBtn.addEventListener("click", () => {
+    // Open email app or close modal to let user check email
+    if (currentVerificationLink) {
+      window.location.href = currentVerificationLink;
+    } else {
+      // User checks their email inbox for verification link
+      hideEmailNotification();
+    }
+  });
 }
 
 const updateCharacterCounter = (field) => {
